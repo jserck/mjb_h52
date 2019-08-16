@@ -1,0 +1,77 @@
+@mixin setFont($size, $media_size) {
+    font-size: $size !important;
+
+    @if $media_size {
+        @media screen and (min-width: 768px) {
+            font-size: $media_size !important;
+        }
+    }
+
+    //     [data-dpr="2"] & {
+    //         font-size: $size * 2 !important;
+    //     }
+
+    //     [data-dpr="3"] & {
+    //         font-size: $size * 3 !important;
+    //     }
+}
+
+@mixin bg($bg, $media_bg) {
+    background: $bg !important;
+
+    @if $media_bg {
+        @media screen and (min-width: 768px) {
+            background: $media_bg !important;
+        }
+    }
+}
+
+@mixin lineHeight($lineHeight, $media_lineHeight) {
+    line-height: $lineHeight !important;
+
+    @if $media_lineHeight {
+        @media screen and (min-width: 768px) {
+            line-height: $media_lineHeight !important;
+        }
+    }
+}
+
+@mixin color($color, $media_color) {
+    color: $color !important;
+
+    @if $media_color {
+        @media screen and (min-width: 768px) {
+            color: $media_color !important;
+        }
+    }
+}
+
+@mixin background($src, $cover: "") {
+    background-image: url($src);
+    background-repeat: no-repeat;
+
+    @if $cover !="" {
+        background-size: cover;
+    }
+
+    @else {
+        background-size: 100% 100%;
+    }
+}
+
+@mixin overFlowEllipsis($clamp) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $clamp;
+}
+
+@mixin linearGradient($deg, $bg1, $log1, $bg2, $log2) {
+    background-image: linear-gradient($deg,
+            $bg1 $log1,
+            $bg2 $log2);
+    background: -webkit-linear-gradient($deg,
+            $bg1 $log1,
+            $bg2 $log2);
+}
