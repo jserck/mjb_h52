@@ -1,18 +1,5 @@
 import Ob from './obshare';
 export default {
-    TESTJSFUNCTION: 'testJSFunction', //传输tokenAZ
-    TESTJSFUNCTIONS: 'testJSFunctions', //传输tokenIOS
-    GETUNITYURL: 'getUnityUrl', //获取unity URL
-    //******************************************
-    INVITATIONSHAREACTION: 'invitationShareAction', //单个分享
-    GOBACKACTION: 'goBackAction', //返回APP（iph）
-    CALLANDROIDFINISH: 'callAndroidFinish', //返回APP（az）
-    SHAREACTION: 'shareAction', //分享（iph）
-    CALLANDROIDSHARE: 'callAndroidShare', //分享（az）
-    LOGINACTION: 'loginAction', //获取token（iph）
-    CALLANDROID: 'callAndroid', //获取token（az）
-    HREFHOUSE: 'hrefHouse', //跳转到楼盘详情
-    UIDJSFUNCTIONS: 'uidJsFunctions', //获取全局 UID
     setupWebViewJavascriptBridge: function(callback) {
         if (window.WebViewJavascriptBridge) {
             return callback(WebViewJavascriptBridge);

@@ -226,7 +226,6 @@
      </article>
 </template>
 <script>
-import SetupWebViewJavascriptBridgeinit from '@/assets/js/setupWebViewJavascriptBridgeinit'
 import MjbAbsoluteIcon from './child/absoluteIcon'
 import MjbGetWhatLi from './child/getWhatLi'
 import MjbAbsoluteIconImg1 from '@/assets/img/appointment/pic_ninengcongzhefendanganzhongdedaoshenme_n@3x.png'
@@ -234,7 +233,7 @@ import MjbAbsoluteIconImg2 from '@/assets/img/appointment/pic_gaifendanganbaokuo
 import MjbAbsoluteIconImg3 from '@/assets/img/appointment/pic_danganxingshiduoyang_n@3x.png'
 import { GroupTitle, Group, XInput, PopupPicker } from 'vux'
 import { setTimeout, clearTimeout, setInterval, clearInterval } from 'timers';
-
+import { mapState } from 'vuex'
 export default {
      components: {
           MjbAbsoluteIcon,
@@ -260,8 +259,14 @@ export default {
                userName: '',
                buildingId: '',
                unitId: '',
-               houseNumber: ''
+               houseNumber: '',
+               token: window.sessionStorage.getItem('token')
           }
+     },
+     computed: {
+          ...mapState({
+               tokens: 'token'
+          })
      },
      methods: {
           fn_picker() {
@@ -278,16 +283,15 @@ export default {
                this.fn_pickerChange1();
           },
           isLogin() {
-               let t = window.sessionStorage.getItem('token');
-               if (!t) {
+               if (!this.token) {
                     this.$vux.loading.hide();
                     let option = {
                          iphData: { message: 'login' },
                          azData: 'login',
-                         iphFn: SetupWebViewJavascriptBridgeinit.LOGINACTION,
-                         azFn: SetupWebViewJavascriptBridgeinit.CALLANDROID
+                         iphFn: this.$BridgeName.LOGINACTION,
+                         azFn: this.$BridgeName.CALLANDROID
                     };
-                    SetupWebViewJavascriptBridgeinit.jsToNative(option);
+                    this.$Bridge.jsToNative(option);
                } else {
                     this.isLoginStatus = true;
                     this.fn_isPub();
@@ -332,7 +336,7 @@ export default {
                     }
                }).catch((err) => {
                     console.log(err);
-                    this.$toast('数据异常');
+                    this.$toast('数据异常1');
                })
           },
           fn_subMit() {
@@ -348,7 +352,7 @@ export default {
                this.$vux.loading.show({
                     text: ''
                })
-               if (!window.sessionStorage.getItem('token')) {
+               if (!this.token) {
                     this.isLogin();
                     return;
                }
@@ -363,7 +367,8 @@ export default {
                          pickerNmae: this.data_picker_see
                     },
                     methods: 'post',
-                    des: true
+                    des: true,
+                    token: this.token
                }
                this.$http(options).then((res) => {
                     if (res.code == 0) {
@@ -377,7 +382,7 @@ export default {
                          }
                     }
                }).catch((err) => {
-                    this.$toast('数据异常');
+                    this.$toast('数据异常2');
                })
           },
           fn_set_form(obj) {
@@ -414,42 +419,28 @@ export default {
                     }
                }).catch((err) => {
                     console.log(err);
-                    this.$toast('数据异常');
+                    this.$toast('数据异常3');
                })
           },
           noLoginBtn() {
                let option = {
                     iphData: { message: 'login' },
                     azData: 'login',
-                    iphFn: SetupWebViewJavascriptBridgeinit.LOGINACTION,
-                    azFn: SetupWebViewJavascriptBridgeinit.CALLANDROID
+                    iphFn: this.$BridgeName.LOGINACTION,
+                    azFn: this.$BridgeName.CALLANDROID
                };
-               SetupWebViewJavascriptBridgeinit.jsToNative(option);
+               this.$Bridge.jsToNative(option);
           }
      },
      created() {
           this.$vux.loading.show({
                text: ''
           })
+          if (!this.token) {
+               this.token = this.tokens;
+          }
+          this.isLogin();
           this.getHttp();
-          let num = 0;
-          let itemr = setInterval(() => {
-               let t = window.sessionStorage.getItem('token');
-               if (!t && num < 8) {
-                    num++;
-                    return;
-               }
-               clearInterval(itemr);
-               this.isLogin();
-               // this.getHttp();
-          }, 200);
-          let itemr2 = setInterval(() => {
-               let t = window.sessionStorage.getItem('token');
-               if (t) {
-                    clearInterval(itemr2);
-                    this.isLogin();
-               }
-          }, 900);
      }
 }
 </script>

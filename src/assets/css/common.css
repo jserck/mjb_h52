@@ -298,6 +298,10 @@ body {
     width: 100%;
 }
 
+.marTop2 {
+    margin-top: 0.2rem;
+}
+
 /* vux插件样式 */
 .vux-loading .weui-toast {
     top: 38% !important;

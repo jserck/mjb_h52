@@ -3,61 +3,85 @@
           <section v-if="!isTypeApp">
                <AppDown />
           </section>
-          <router-view></router-view>
+          <section v-if="isTokenShow">
+               <router-view></router-view>
+          </section>
      </div>
 </template>
 
 <script>
 import AppDown from './components/common/downApp.vue'
-import { mapState, mapActions } from 'vuex'
-import Ob from '@/assets/js/obshare.js'
-import SetupWebViewJavascriptBridgeinit from './assets/js/setupWebViewJavascriptBridgeinit'
-import { setTimeout } from 'timers';
+import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
      name: 'App',
      data() {
           return {
-               transitionName: ''
+               transitionName: '',
+               isTokenShow: false
           }
      },
-     mounted() {
-          this.set_istypeapp();
-     },
      created() {
-          this.getUid();
+          this.$vux.loading.show({
+               text: '获取数据'
+          })
+          this.set_istypeapp();
+          this.BridgeGetToken();
      },
      components: {
           AppDown
      },
-     methods: {
-          ...mapActions({
-               set_transation_slide: 'set_transation_slide',
-               set_istypeapp: 'set_istypeapp'
-          }),
-          getUid() {
-               let fn = null;
-               if (Ob.is_iph()) {
-                    fn = SetupWebViewJavascriptBridgeinit['TESTJSFUNCTION'];
-               } else {
-                    fn = SetupWebViewJavascriptBridgeinit['TESTJSFUNCTIONS'];
-               }
-               SetupWebViewJavascriptBridgeinit['nativeToJs'](fn).then((res) => {
-                    let token = null;
-                    if (typeof res == 'string') {
-                         token = res;
-                    } else {
-                         token = res.token;
-                    }
-                    window.sessionStorage.setItem('token', token);
-               });
-          }
-     },
      computed: {
           ...mapState({
                transation_slide: 'transation_slide',
-               isTypeApp: 'isTypeApp'
+               isTypeApp: 'isTypeApp',
+               token: 'token',
           })
      },
+     methods: {
+          ...mapActions({
+               set_transation_slide: 'set_transation_slide',
+               set_istypeapp: 'set_istypeapp',
+               setToken: 'SET_TOKEN'
+          }),
+          ...mapMutations({
+               setToken: 'SET_TOKEN'
+          }),
+          // 与APP交互获取token
+          BridgeGetToken() {
+               // 非APP内嵌直接展示无需获取token
+               if (!this.isTypeApp) {
+                    this.isTokenShow = true;
+                    this.$vux.loading.hide();
+                    return;
+               }
+               // 暴露JS的方法给APP，获取到token后执行回调保存并且展示页面
+               this.$BridgeAppToJs.GETTOKEN().then((res) => {
+                    this.setToken(res);
+                    window.sessionStorage.setItem('token', res);
+                    this.isTokenShow = true;
+                    this.$vux.loading.hide();
+               });
+               //针对安卓交互的延迟做的容错处理，如果在有效时间内没有获取到token，进行循环获取，指定时间内没有拿到的话视为放弃，直接展示页面
+               if (!this.$Ob.is_az()) {
+                    this.isTokenShow = true;
+               } else {
+                    let num = 0;
+                    let timer = setInterval(() => {
+                         if (this.token) {
+                              this.isTokenShow = true;
+                              this.$vux.loading.hide();
+                              clearInterval(timer);
+                         } else if (num >= 5) {
+                              // this.$toast('未获取到token,请检查网络');
+                              this.isTokenShow = true;
+                              this.$vux.loading.hide();
+                              clearInterval(timer);
+                         }
+                         num++;
+                    }, 200);
+               }
+          },
+     }
 }
 </script>
 <style scoped lang="scss">

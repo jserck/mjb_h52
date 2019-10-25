@@ -36,7 +36,6 @@
 import NumberAnimation from './number-animation'
 import HandleDislog from '../../common/dislog'
 import { mapState } from 'vuex'
-import SetupWebViewJavascriptBridgeinit from '@/assets/js/setupWebViewJavascriptBridgeinit';
 export default {
      components: {
           NumberAnimation,
@@ -73,7 +72,7 @@ export default {
                     iphFn: 'hrefHouse',
                     azFn: 'hrefHouse'
                };
-               SetupWebViewJavascriptBridgeinit.jsToNative(options);
+               this.$Bridge.jsToNative(options);
           },
           fn_hrefRealView() {
                let url = this.houseItem.webUrl;

@@ -107,9 +107,51 @@ export default new Router({
         },
         //全流程监控档案预约
         {
-             path:'/appointment/:id',
-             name:'appointment',
-             component:routerComponents["APPOINTMENT"]['component'],
+            path: '/appointment/:id',
+            name: 'appointment',
+            component: routerComponents["APPOINTMENT"]['component'],
+        },
+        //楼盘详情
+        {
+            path: '/obshare/:id/:platform',
+            name: 'obshare',
+            component: routerComponents["OBSHARE"]['component'],
+        },
+        //全景分享详情
+        {
+            path: '/panorama',
+            name: 'panorama',
+            component: routerComponents["PANORAMA"]['component'],
+        },
+        //鹰眼会员服务协议
+        {
+            path: '/serviceAgreement',
+            name: 'serviceAgreement',
+            component: routerComponents["SERVICEAGREEMENT"]['component'],
+        },
+        //鹰眼鉴房隐私协议
+        {
+            path: '/privacyAgreement',
+            name: 'privacyAgreement',
+            component: routerComponents["PRIVACYAGREEMENT"]['component'],
+        },
+        //鹰眼会员连续包月协议
+        {
+            path: '/monthlyAgreement',
+            name: 'monthlyAgreement',
+            component: routerComponents["MONTHLYAGREEMENT"]['component'],
+        },
+        //提示下载全新APP页面
+        {
+            path: '/downNewApp',
+            name: 'downNewApp',
+            component: routerComponents["DOWNNEWAPP"]['component'],
+        },
+        //安全文明&金字塔
+        {
+            path: '/safetyCulture',
+            name: 'safetyCulture',
+            component: routerComponents["SAFETYCULTURE"]['component'],
         }
     ]
 })

@@ -6,16 +6,17 @@ import {
     desc
 } from './des'
 import BaseURL from './baseurl'
-
+import store from '../../store/state'
 export default function({
     urls = '',
     data = {},
     params = {},
     headers = {},
     methods = 'get',
+    platform = 3,
     responseType = '',
     des = false,
-    token = window.sessionStorage.getItem('token')
+    token = store.token || window.sessionStorage.getItem('token')
 }) {
     const servise = axios.create({
         baseURL: BaseURL,
@@ -26,7 +27,8 @@ export default function({
     let keys = "yhgt!d%sd*aw%dSDSFSsa#mng~dsq";
     let s = {
         token: token,
-        body: data
+        body: data,
+        platform
     };
     req_interceptors();
     res_interceptors();

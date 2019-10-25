@@ -31,7 +31,6 @@
     </article>
 </template>
 <script>
-import SetupWebViewJavascriptBridgeinit from '@/assets/js/setupWebViewJavascriptBridgeinit';
 
 export default {
     props: ['title_name', 'isHideObshare', 'bgColor'],
@@ -48,7 +47,7 @@ export default {
                 iphFn,
                 azFn
             };
-            SetupWebViewJavascriptBridgeinit.jsToNative(options);
+            this.$Bridge.jsToNative(options);
         },
         leftHandler() {
             if (this.$route.name == 'home') {

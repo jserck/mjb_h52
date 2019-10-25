@@ -1,7 +1,4 @@
 import Ob from '@/assets/js/obshare.js'
-import {
-    promises
-} from 'fs';
 const mutations = {
     SET_TRANSATION_SLIDE(state, data) {
         state.transation_slide = data;
@@ -10,11 +7,11 @@ const mutations = {
         let url = window.location.href;
         let index = url.indexOf("?") + 1;
         let str = url.substring(index, url.length);
-        if (!Ob.isMobile()) {
-            state.isTypeApp = true;
-            return;
-        }
-        state.isTypeApp = ((/=app/.test(str)) || (/type=/.test(str)));
+        //    if (!Ob.isMobile()) {
+        //        state.isTypeApp = true;
+        //        return;
+        //    }
+        state.isTypeApp = ((/=app/.test(str)) && (/type=/.test(str))) || (/type=app/.test(str));
     },
     SET_TITLEBAR(state, data) {
         state.title_name = data.title_name;
@@ -38,5 +35,11 @@ const mutations = {
             state.qijiawang.city2 = data.city2;
         }
     },
+    SET_TOKEN(state, data) {
+        state.token = data;
+    },
+    SET_UID(state, data) {
+        state.uid = data;
+    }
 }
 export default mutations;

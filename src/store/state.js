@@ -1,5 +1,6 @@
 const state = {
-    transation_slide: false, //是否需要页面切换滑动
+    token: '', //token
+    uid: '', //uid
     isTypeApp: true, //是否在app打开h5
     title_name: '全流程监控', //导航栏名称
     bgColor: '#fff', //导航栏背景色

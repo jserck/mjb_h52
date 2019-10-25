@@ -42,7 +42,36 @@ export const WELFARE = {
 export const NUMBERHOUSE = {
     component: () => import('@/components/numberHouse/number-house')
 };
+
 //全流程监控档案预约
 export const APPOINTMENT = {
     component: () => import('@/components/appointment')
+};
+//楼盘详情分享
+export const OBSHARE = {
+    component: () => import('@/components/obshare/obshare.vue')
+};
+//全景分享详情
+export const PANORAMA = {
+    component: () => import('@/components/panorama/panorama.vue')
+};
+//鹰眼会员服务协议
+export const SERVICEAGREEMENT = {
+    component: () => import('@/components/serviceAgreement/serviceAgreement')
+};
+//鹰眼鉴房隐私协议
+export const PRIVACYAGREEMENT = {
+    component: () => import('@/components/privacyAgreement/privacyAgreement')
+};
+//鹰眼会员连续包月协议
+export const MONTHLYAGREEMENT = {
+    component: () => import('@/components/monthlyAgreement/monthlyAgreement')
+};
+//提示下载全新APP页面
+export const DOWNNEWAPP = {
+    component: () => import('@/components/downNewApp/downNewApp')
+};
+//安全文明&金字塔
+export const SAFETYCULTURE = {
+    component: () => import('@/components/safetyCulture/safetyCulture')
 };
