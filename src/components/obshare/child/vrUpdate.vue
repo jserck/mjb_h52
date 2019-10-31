@@ -2,20 +2,30 @@
      <article class="m-vrUpdate">
           <section>
                <div
-                    v-if="isVR == 1"
+                    v-if="isVR == 1&&isVRUpdate !=1"
                     class="vr_btn"
                     v-on:click.prevent="loadHandler('0','animated bounceIn')"
                >
                     <div>
                          <img
                               class="flexImg"
-                              src="@/assets/img/obshare/icon_loupanxiangqingye_quanjinggongdi@2x.png"
+                              src="@/assets/img/obshare/icon_wurenjijiankong_n@3x.png"
                               alt
                          />
                     </div>
-                    <span v-if="isVRUpdate ==1" class="updateIcon">
-                         <badge text="更新"></badge>
-                    </span>
+               </div>
+               <div
+                    v-if="isVR == 1&&isVRUpdate ==1"
+                    class="vr_btn"
+                    v-on:click.prevent="loadHandler('0','animated bounceIn')"
+               >
+                    <div>
+                         <img
+                              class="flexImg"
+                              src="@/assets/img/obshare/icon_wurenjijiankong_s@3x.png"
+                              alt
+                         />
+                    </div>
                </div>
           </section>
      </article>

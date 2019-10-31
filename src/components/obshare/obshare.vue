@@ -49,18 +49,22 @@
           <section
                class="g-queryClass marTop2"
                v-if="abShareData.panoramaSite.panoramaList && abShareData.panoramaSite.panoramaList.length !=0"
-               data-name="航拍监控"
+               data-name="无人机监控"
           >
                <ObContainer
                     :totalCount="abShareData.panoramaSite.totalCount"
                     :isShow="true"
-                    tit="航拍监控"
+                    tit="无人机监控"
                >
                     <QueryClass :abShareData="abShareData"></QueryClass>
                </ObContainer>
           </section>
 
-          <section class="g-queryClass marTop2" data-name="质量金字塔">
+          <section
+               class="g-queryClass marTop2"
+               data-name="质量金字塔"
+               v-if="Object.keys(abShareData.qualityPyramid).length > 0"
+          >
                <ObContainer
                     :totalCount="'?'"
                     :isShow="true"
@@ -70,11 +74,15 @@
                     <Pyramid :abShareData="abShareData"></Pyramid>
                </ObContainer>
           </section>
-          <section class="g-queryClass marTop2" data-name="管理仪表盘">
+          <section
+               class="g-queryClass marTop2"
+               data-name="安全文明施工"
+               v-if="Object.keys(abShareData.projectManageRisk).length > 0"
+          >
                <ObContainer
                     :totalCount="'?'"
                     :isShow="true"
-                    tit="管理仪表盘"
+                    tit="安全文明施工"
                     :webUrl="abShareData.projectManageRisk.webUrl"
                >
                     <InstrumentPanel :abShareData="abShareData"></InstrumentPanel>

@@ -22,7 +22,7 @@ export default {
      },
      created() {
           this.$vux.loading.show({
-               text: '获取数据'
+               text: '加载中.'
           })
           this.set_istypeapp();
           this.BridgeGetToken();
@@ -49,7 +49,7 @@ export default {
           // 与APP交互获取token
           BridgeGetToken() {
                // 非APP内嵌直接展示无需获取token
-               if (!this.isTypeApp) {
+               if (!this.isTypeApp || !this.$Ob.isMobile()) {
                     this.isTokenShow = true;
                     this.$vux.loading.hide();
                     return;
@@ -62,9 +62,7 @@ export default {
                     this.$vux.loading.hide();
                });
                //针对安卓交互的延迟做的容错处理，如果在有效时间内没有获取到token，进行循环获取，指定时间内没有拿到的话视为放弃，直接展示页面
-               if (!this.$Ob.is_az()) {
-                    this.isTokenShow = true;
-               } else {
+               {
                     let num = 0;
                     let timer = setInterval(() => {
                          if (this.token) {

@@ -68,6 +68,7 @@
 }
 
 @mixin linearGradient($deg, $bg1, $log1, $bg2, $log2) {
+    background: #0080ff;
     background-image: linear-gradient($deg,
             $bg1 $log1,
             $bg2 $log2);

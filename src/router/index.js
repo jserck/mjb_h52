@@ -152,6 +152,18 @@ export default new Router({
             path: '/safetyCulture',
             name: 'safetyCulture',
             component: routerComponents["SAFETYCULTURE"]['component'],
-        }
+        },
+        //质量寻光计划黑匣子
+        {
+            path: '/qualityFind',
+            name: 'QualityFind',
+            component: routerComponents["QUALITYFIND"]['component'],
+        },
+        //VIP安全快车
+        {
+            path: '/vipFastRide',
+            name: 'vipFastRide',
+            component: routerComponents["VIPFASTRIDE"]['component'],
+        },
     ]
 })

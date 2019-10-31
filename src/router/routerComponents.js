@@ -75,3 +75,11 @@ export const DOWNNEWAPP = {
 export const SAFETYCULTURE = {
     component: () => import('@/components/safetyCulture/safetyCulture')
 };
+//质量寻光计划黑匣子
+export const QUALITYFIND = {
+    component: () => import('@/components/qualityFind/qualityFind')
+};
+//VIP安全快车
+export const VIPFASTRIDE = {
+    component: () => import('@/components/vipFastRide/vipFastRide')
+};
