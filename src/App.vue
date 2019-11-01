@@ -17,15 +17,16 @@ export default {
      data() {
           return {
                transitionName: '',
-               isTokenShow: false
+               isTokenShow: false,
+               isToken: false
           }
      },
      created() {
-          this.$vux.loading.show({
-               text: '加载中.'
-          })
           this.set_istypeapp();
-          this.BridgeGetToken();
+          if (!this.isTypeApp) {
+               this.isTokenShow = true;
+               this.$vux.loading.hide();
+          }
      },
      components: {
           AppDown
@@ -37,6 +38,13 @@ export default {
                token: 'token',
           })
      },
+     watch: {
+          // 使用watch 监听$router的变化
+          $route(to, from) {
+               this.isToken = to.meta.isToken;
+               this.isBridgeGetToken();
+          }
+     },
      methods: {
           ...mapActions({
                set_transation_slide: 'set_transation_slide',
@@ -46,14 +54,21 @@ export default {
           ...mapMutations({
                setToken: 'SET_TOKEN'
           }),
-          // 与APP交互获取token
-          BridgeGetToken() {
-               // 非APP内嵌直接展示无需获取token
-               if (!this.isTypeApp || !this.$Ob.isMobile()) {
+          isBridgeGetToken() {
+               console.log(this.isToken, this.isTypeApp, this.$Ob.isMobile());
+               if (!this.isToken || !this.isTypeApp || !this.$Ob.isMobile()) {
                     this.isTokenShow = true;
                     this.$vux.loading.hide();
                     return;
                }
+               this.BridgeGetToken();
+          },
+          // 与APP交互获取token
+          BridgeGetToken() {
+               // 非APP内嵌直接展示无需获取token
+               this.$vux.loading.show({
+                    text: '获取用户信息.'
+               })
                // 暴露JS的方法给APP，获取到token后执行回调保存并且展示页面
                this.$BridgeAppToJs.GETTOKEN().then((res) => {
                     this.setToken(res);
@@ -70,7 +85,7 @@ export default {
                               this.$vux.loading.hide();
                               clearInterval(timer);
                          } else if (num >= 5) {
-                              // this.$toast('未获取到token,请检查网络');
+                              this.$toast('未获取到token,请检查网络');
                               this.isTokenShow = true;
                               this.$vux.loading.hide();
                               clearInterval(timer);
@@ -104,7 +119,6 @@ export default {
           .u-titBar-font {
                margin: auto;
                display: inline-block;
-               font-family: PingFangSC-Medium;
                font-size: 0.36rem;
                color: #ffffff;
                line-height: 0.84rem;

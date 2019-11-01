@@ -8,34 +8,22 @@ export default new Router({
     routes: [{
             path: '/apprasial/:id/:uid',
             name: 'apprasial',
-            component: routerComponents["APPRASIAL"]['component'],
-            meta: {
-                index: 0
-            }
+            component: routerComponents["APPRASIAL"]['component']
         },
         {
             path: '/error',
             name: '',
             component: routerComponents["ERROR"]['component'],
-            meta: {
-                index: 1
-            }
         },
         {
             path: '*',
             component: routerComponents["ERROR"]['component'],
-            meta: {
-                index: 99
-            }
         },
         //鹰眼测评
         {
             path: '/eagleEye/:cid',
             name: 'eagleEye',
             component: routerComponents["EAGLEEYE"]['component'],
-            meta: {
-                index: 2
-            }
         },
         //一户一档
         {
@@ -48,50 +36,32 @@ export default new Router({
                     path: '/houseHold/home/:id/:typeid',
                     name: 'home',
                     component: routerComponents["HOME"]['component'],
-                    meta: {
-                        index: 0
-                    }
                 },
                 //一户一档整体概况详情
                 {
                     path: '/houseHold/general',
                     name: 'general',
                     component: routerComponents["GENERAL"]['component'],
-                    meta: {
-                        index: 1
-                    }
                 },
                 //一户一档户内建设档案目录
                 {
                     path: '/houseHold/record/:id',
                     name: 'record',
                     component: routerComponents["RECORD"]['component'],
-                    meta: {
-                        index: 5
-                    }
                 },
                 //pdf
                 {
                     path: '/houseHold/pdf',
                     name: 'pdf',
                     component: routerComponents["PDF"]['component'],
-                    meta: {
-                        index: 1
-                    }
                 },
                 //video
                 {
                     path: '/houseHold/video',
                     name: 'video',
                     component: routerComponents["VIDEO"]['component'],
-                    meta: {
-                        index: 5
-                    }
                 },
             ],
-            meta: {
-                index: 3
-            },
         },
         //报名预约领取专属福利
         {
@@ -110,6 +80,9 @@ export default new Router({
             path: '/appointment/:id',
             name: 'appointment',
             component: routerComponents["APPOINTMENT"]['component'],
+            meta: {
+                isToken: true
+            },
         },
         //楼盘详情
         {
@@ -133,7 +106,7 @@ export default new Router({
         {
             path: '/privacyAgreement',
             name: 'privacyAgreement',
-            component: routerComponents["PRIVACYAGREEMENT"]['component'],
+            component: routerComponents["PRIVACYAGREEMENT"]['component']
         },
         //鹰眼会员连续包月协议
         {
