@@ -64,6 +64,9 @@
                          </td>
                     </div>
                </div>
+               <div class="g-risk">
+                    <p>风险提示：指的是根据一定周期内用户及第三方贡献的楼盘质量数据，按照符合国家标准的工程质量评判评测标准并通过质量金字塔算法综合计算得出的工程质量风险评估模型，该模型仅为用户提供阶段性参考作用，可能存在一定误差，不代表楼盘最终交付结果，鹰眼鉴房不做任何承诺，亦不承担任何法律责任。</p>
+               </div>
           </section>
      </article>
 </template>
@@ -113,6 +116,10 @@
      }
      .list-style {
           list-style-type: lower-roman;
+     }
+     .g-risk {
+          margin-top: 0.6rem;
+          margin-bottom: 0.2rem;
      }
 }
 </style>

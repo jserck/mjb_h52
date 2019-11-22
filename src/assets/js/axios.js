@@ -14,12 +14,13 @@ export default function({
     headers = {},
     methods = 'get',
     platform = 3,
+    isJson = false,
     responseType = '',
     des = false,
     token = store.token || window.sessionStorage.getItem('token')
 }) {
     const servise = axios.create({
-        baseURL: BaseURL,
+        baseURL: isJson ? '' : BaseURL,
         timeout: 8000,
         retry: 4,
         retryDelay: 1000
@@ -184,7 +185,6 @@ export default function({
     //   axios.interceptors.request.eject(resq);
     return servise({
         url: urls,
-        baseURL: BaseURL,
         responseType: responseType,
         headers: headers,
         method: methods,

@@ -83,3 +83,7 @@ export const QUALITYFIND = {
 export const VIPFASTRIDE = {
     component: () => import('@/components/vipFastRide/vipFastRide')
 };
+//vip支付
+export const VIPPAY = {
+    component: () => import('@/components/vipPay/vipPay')
+}

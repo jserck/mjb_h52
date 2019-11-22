@@ -138,5 +138,11 @@ export default new Router({
             name: 'vipFastRide',
             component: routerComponents["VIPFASTRIDE"]['component'],
         },
+        //vip支付
+        {
+            path: '/vipPay/:platform',
+            name: 'vipPay',
+            component: routerComponents["VIPPAY"]["component"]
+        }
     ]
 })
